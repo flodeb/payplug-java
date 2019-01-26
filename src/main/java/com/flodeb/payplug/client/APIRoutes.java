@@ -8,7 +8,7 @@ public interface APIRoutes {
     Integer API_VERSION = 1;
 
     // Parameters
-    String PAYMENT_ID = "PAYMENT_ID";
+    String PAYMENT_ID = "payment_id";
 
     // Resources routes
     String PAYMENT_RESOURCE    = "/payments";

@@ -23,7 +23,6 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClientException;
@@ -33,6 +32,7 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class HttpClient {
 
@@ -67,7 +67,7 @@ public class HttpClient {
 
     public <T> T get(PayplugConfiguration configuration,
                      String url,
-                     MultiValueMap<String, String> params,
+                     Map<String, String> params,
                      Class<T> className) throws PayplugException {
         HttpHeaders headers = getHeaders(configuration.getToken());
         HttpEntity<String> request = new HttpEntity<>(headers);

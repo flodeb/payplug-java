@@ -1,11 +1,11 @@
 package com.flodeb.payplug.resource;
 
 import com.flodeb.payplug.client.APIRoutes;
+import com.flodeb.payplug.client.HttpClient;
 import com.flodeb.payplug.core.PayplugConfiguration;
 import com.flodeb.payplug.exception.PayplugException;
 import com.flodeb.payplug.exception.UndefinedAttributeException;
 import com.flodeb.payplug.model.Refund;
-import com.flodeb.payplug.client.HttpClient;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,8 +14,9 @@ import org.mockito.Mock;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.powermock.api.mockito.PowerMockito.when;
 
@@ -74,8 +75,8 @@ public class RefundResourceTest {
         realRefund.setId("NEW_ID");
         realRefund.setPaymentId("NEW_PAY_ID");
 
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add(APIRoutes.PAYMENT_ID, "OLD_PAY_ID");
+        Map<String, String> params = new HashMap<>();
+        params.put(APIRoutes.PAYMENT_ID, "OLD_PAY_ID");
 
         when(APIRoutes.getRoute(APIRoutes.REFUND_RESOURCE, "OLD_ID")).thenReturn("http://refunds.com/OLD_ID");
         when(httpClient.get(configuration, "http://refunds.com/OLD_ID", params, Refund.class)).thenReturn(realRefund);

@@ -6,9 +6,10 @@ import com.flodeb.payplug.core.PayplugConfiguration;
 import com.flodeb.payplug.exception.PayplugException;
 import com.flodeb.payplug.exception.UndefinedAttributeException;
 import com.flodeb.payplug.model.Refund;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RefundResource implements IAPIResource {
 
@@ -29,8 +30,8 @@ public class RefundResource implements IAPIResource {
             throw new UndefinedAttributeException("The payment_id of the REFUND is not set");
         }
 
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add(APIRoutes.PAYMENT_ID, refund.getPaymentId());
+        Map<String, String> params = new HashMap<>();
+        params.put(APIRoutes.PAYMENT_ID, refund.getPaymentId());
 
         return httpClient.get(configuration, APIRoutes.getRoute(APIRoutes.REFUND_RESOURCE, refund.getId()), params, Refund.class);
     }

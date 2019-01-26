@@ -1,8 +1,15 @@
 package com.flodeb.payplug.client;
 
-import com.flodeb.payplug.exception.*;
-import com.flodeb.payplug.model.Payment;
 import com.flodeb.payplug.core.PayplugConfiguration;
+import com.flodeb.payplug.exception.BadRequestException;
+import com.flodeb.payplug.exception.ForbiddenException;
+import com.flodeb.payplug.exception.HttpException;
+import com.flodeb.payplug.exception.NotAllowedException;
+import com.flodeb.payplug.exception.NotFoundException;
+import com.flodeb.payplug.exception.PayplugException;
+import com.flodeb.payplug.exception.ServerException;
+import com.flodeb.payplug.exception.UnauthorizedException;
+import com.flodeb.payplug.model.Payment;
 import com.flodeb.payplug.model.Refund;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,15 +18,20 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.http.*;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -79,8 +91,8 @@ public class HttpClientTest {
         Refund refund = new Refund();
         refund.setId("PAMWNDY");
 
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("paymentId", "96281");
+        Map<String, String> params = new HashMap<>();
+        params.put("paymentId", "96281");
 
         when(restTemplate.exchange(eq(url), eq(HttpMethod.GET), any(HttpEntity.class), eq(Refund.class), eq(params)))
                 .thenReturn(ResponseEntity.ok(refund));
