@@ -41,7 +41,7 @@ public class APIResourceFactory {
                 return refundResource;
             }
         } catch (IOException e) {
-            throw new UnknownAPIResourceException("Invalid JSON request");
+            throw new UnknownAPIResourceException("Invalid JSON request " + e.getMessage());
         }
 
         throw new UnknownAPIResourceException("Unknown object type");
