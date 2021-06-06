@@ -28,7 +28,6 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,10 +39,7 @@ public class HttpClient {
 
     public HttpClient(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
-    }
 
-    @PostConstruct
-    public void postConstruct() {
         ClientHttpRequestFactory factory = new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
         restTemplate.setRequestFactory(factory);
         restTemplate.setInterceptors(Collections.singletonList(new LoggingRequestInterceptor()));
