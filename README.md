@@ -1,4 +1,3 @@
-
 # Installation with maven
 
 Add jitpack repository :
