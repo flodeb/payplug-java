@@ -37,6 +37,7 @@ PayplugConfiguration payPlugConf = new PayplugConfiguration("sk_test_AAAAAAAAAAA
 Instanciate a `PaymentService` (at this moment, it uses a `RestTemplate` from Spring Framework)
 
 ```java
+// You may want to create beans if you're using Spring
 HttpClient httpClient = new HttpClient(new RestTemplate());
 PaymentService paymentService = new PaymentService(httpClient);
 ```
@@ -66,12 +67,19 @@ paymentService.create(payment, payPlugConf);
 
 ## IPN: Receive notification of Payment (via notificationUrl)
 
-PayPlug calls your notification url Hook. You can treat it with `NotificationService`  :
+PayPlug calls your notification url Hook
+
+Instanciate a NotificationService (at this moment, it uses a RestTemplate from Spring Framework)
 
 ```java
+// You may want to create beans if you're using Spring
 HttpClient httpClient = new HttpClient(new RestTemplate());
 NotificationService notificationService = new NotificationService(httpClient);
+```
 
+Treat the content :
+
+```java
 // content is a the request content sent by PayPlug to your hook
 Resource resource = notificationService.treat(content, payPlugConfig);
 ```
