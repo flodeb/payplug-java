@@ -68,8 +68,13 @@ paymentService.create(payment, payPlugConf);
 
 PayPlug calls your notification url Hook. You can treat it with `NotificationService`  :
 
+```java
+HttpClient httpClient = new HttpClient(new RestTemplate());
+NotificationService notificationService = new NotificationService(httpClient);
+
 // content is a the request content sent by PayPlug to your hook
 Resource resource = notificationService.treat(content, payPlugConfig);
+```
 
 Then, you can treat the resource (check if payment is Paid, ... etc), depending of what it is :
 
