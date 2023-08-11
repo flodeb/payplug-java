@@ -20,4 +20,8 @@ public class PaymentService {
 
         return httpClient.post(configuration, APIRoutes.getRoute(APIRoutes.PAYMENT_RESOURCE, null), payment, Payment.class);
     }
+
+    public Payment get(String paymentId, PayplugConfiguration configuration) throws PayplugException {
+        return httpClient.get(configuration, APIRoutes.getRoute(APIRoutes.PAYMENT_RESOURCE, paymentId), Payment.class);
+    }
 }
