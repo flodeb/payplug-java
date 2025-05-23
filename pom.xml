@@ -5,7 +5,7 @@
 
     <groupId>io.github.flodeb</groupId>
     <artifactId>payplug-java</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
     <packaging>jar</packaging>
 
     <name>Payplug Lib for JAVA</name>
@@ -47,7 +47,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-            <version>1.18.10</version>
+            <version>1.18.38</version>
         </dependency>
 
         <!-- TEST -->
