@@ -14,6 +14,10 @@ public interface APIRoutes {
     String PAYMENT_RESOURCE    = "/payments";
     String REFUND_RESOURCE     = PAYMENT_RESOURCE + "/{" + PAYMENT_ID + "}/refunds";
 
+    static String getCreateRefundRoute(String paymentId) {
+        return getRoute(REFUND_RESOURCE.replace("{" + PAYMENT_ID + "}", paymentId), null);
+    }
+
     static String getRoute(String route, String resourceId) {
         String resourceIdUrl = !StringUtils.isEmpty(resourceId) ? "/" + resourceId : "";
 
